@@ -1,0 +1,46 @@
+﻿@page
+@model TheVault.Pages.Products.IndexModel
+@{
+}
+
+
+<br />
+<h2>List of products</h2>
+
+<a class="btn btn-primary btn-sm" href="/Products/Create">New Product</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Instock</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ( var item in Model.ListofProducts)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.desc</td>
+                <td>@item.instock</td>
+                <td>@item.price</td>
+                <td>@item.image</td>
+                <td>@item.category</td>
+               
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Products/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Products/Delete?id=@item.id">Delete</a>
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
