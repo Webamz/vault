@@ -1,0 +1,40 @@
+﻿@page
+@model TheVault.Pages.Sellers.IndexModel
+@{
+}
+
+<br />
+<h2>List of Sellers</h2>
+
+<a class="btn btn-primary btn-sm" href="/Sellers/Create">New Seller</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ( var item in Model.ListofSellers)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.email</td>
+                <td>@item.phone</td>
+                <td>@item.address</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Sellers/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Sellers/Delete?id=@item.id">Delete</a>
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
