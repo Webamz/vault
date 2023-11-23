@@ -1,0 +1,58 @@
+﻿@page
+@model TheVault.Pages.Orders.EditModel
+@{
+}
+
+
+<br />
+<h2>Edit Order</h2>
+
+@if(Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dimissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+
+<form method="post">
+        <input type="hidden" name="id" value="@Model.orderInfo.id" />
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Product Id</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="pdt_id" value="@Model.orderInfo.pdt_id" />
+        </div>
+    </div>
+     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Seller</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="seller" value="@Model.orderInfo.seller_id" />
+        </div>
+    </div>
+
+     <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Price</label>
+        <div class="col-sm-6">
+            <input type="tel" class="form-control" name="price" value="@Model.orderInfo.order_price" />
+        </div>
+    </div>
+
+
+ @if(Model.successMessage.Length > 0)
+{
+    <div class="alert alert-success alert-dimissible fade show" role="alert">
+        <strong>@Model.successMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+
+     <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>
+        </div>
+    </div>
+
+</form>
