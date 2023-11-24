@@ -1,0 +1,20 @@
+﻿@page
+@model TheCollection.Pages.CartModel
+@{
+}
+
+<h2>Your Cart</h2>
+
+@if (Model.CartItems.Count > 0)
+{
+    <ul>
+        @foreach (var item in Model.CartItems)
+        {
+            <li>@item.Name - @item.Price</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}

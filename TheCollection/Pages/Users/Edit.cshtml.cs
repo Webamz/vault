@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace TheCollection.Pages.Users
 {
-    [Authorize(AuthenticationSchemes = "MyCookieAuth", Policy = "RequireAdminRole")]
+    [Authorize]
 
     public class EditModel : PageModel
     {

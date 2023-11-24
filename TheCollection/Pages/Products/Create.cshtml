@@ -3,7 +3,6 @@
 @{
 }
 
-
 <br />
 <h2>New Product</h2>
 
@@ -15,72 +14,72 @@
     </div>
 }
 
-<form method="post">
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Name</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="name" value="@Model.productInfo.name" />
-        </div>
-    </div>
-     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Description</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="description" value="@Model.productInfo.desc" />
-        </div>
-    </div>
-
-     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Price</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="price" value="@Model.productInfo.price" />
-        </div>
-    </div>
-
-     <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">In-stock</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="instock" value="@Model.productInfo.instock" />
-        </div>
-    </div>
-
-      <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Image Url</label>
-        <div class="col-sm-6">
-            <input type="text" class="form-control" name="image" value="@Model.productInfo.image" />
-        </div>
-    </div>
-
-    <div class="row mb-3">
-        <label class="col-sm-3 col-form-label">Category</label>
-        <div class="col-sm-6">
-            <select class="form-control" name="category">
-                @foreach (var category in @Model.ListofCategories)
-                {
-                    <option value="@category.id">@category.name</option>
-                }
-            </select>
-        </div>
-    </div>
-
-    @if (User.IsInRole("admin"))
-    {
+<form method="post" class="row g-3">
+    <div class="col-md-6">
         <div class="row mb-3">
-            <label class="col-sm-3 col-form-label">Seller</label>
-            <div class="col-sm-6">
-                <input type="text" class="form-control" name="seller" value="@Model.productInfo.seller" />
+            <label class="col-sm-3 col-form-label">Name</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="name" value="@Model.productInfo.name" />
             </div>
         </div>
-    }
-
- @if(Model.successMessage.Length > 0)
-{
-    <div class="alert alert-success alert-dimissible fade show" role="alert">
-        <strong>@Model.successMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Description</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="description" value="@Model.productInfo.desc" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Price</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="price" value="@Model.productInfo.price" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">In-stock</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="instock" value="@Model.productInfo.instock" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Image Url</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" name="image" value="@Model.productInfo.image" id="productimage" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Category</label>
+            <div class="col-sm-9">
+                <select class="form-control" name="category">
+                    @foreach (var category in @Model.ListofCategories)
+                    {
+                        <option value="@category.id">@category.name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        @if (User.IsInRole("admin"))
+        {
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Seller</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="seller" value="@Model.productInfo.seller" />
+                </div>
+            </div>
+        }
     </div>
-}
-
-     <div class="row mb-3">
+    <div class="col-md-6">
+        <div class="form-group text-center">
+            <img id="ImagePreview" class="border-info rounded-circle" style="max-width: 250px" />
+        </div>
+    </div>
+    @if(Model.successMessage.Length > 0)
+    {
+        <div class="alert alert-success alert-dimissible fade show" role="alert">
+            <strong>@Model.successMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    }
+    <div class="row mb-3">
         <div class="offset-sm-3 col-sm-3 d-grid">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -88,12 +87,25 @@
             <a class="btn btn-outline-primary" href="/" role="button">Cancel</a>
         </div>
     </div>
-     @if(Model.successMessage.Length > 0)
-{
-    <div class="alert alert-success alert-dimissible fade show" role="alert">
-        <strong>@Model.successMessage</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
-    </div>
-}
-
+    @if(Model.successMessage.Length > 0)
+    {
+        <div class="alert alert-success alert-dimissible fade show" role="alert">
+            <strong>@Model.successMessage</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    }
 </form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ImagePreview');
+            output.src = $("#productimage").val();
+        })
+
+        $("#productimage").on("change", function () {
+            var output = document.getElementById('ImagePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}

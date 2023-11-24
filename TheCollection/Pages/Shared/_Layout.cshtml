@@ -32,6 +32,13 @@
             <a class="nav-link text-dark" asp-area="" asp-page="/Users/Index">Users</a>
         </li>
 
+    @if(User.IsInRole("seller"))
+    {
+
+       <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Products/MyProducts">My Products</a>
+        </li>
+     }
 
     @if (User.IsInRole("admin"))
     {

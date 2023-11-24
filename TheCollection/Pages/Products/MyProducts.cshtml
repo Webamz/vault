@@ -1,7 +1,8 @@
 ﻿@page
-@model TheVault.Pages.Products.IndexModel
+@model TheCollection.Pages.Products.MyProductsModel
 @{
 }
+
 
 <style>
     .card-img-top {
@@ -46,7 +47,7 @@
                         </ul>
                     </div>
                     <div class="card-footer">
-                        @if (User.IsInRole("admin"))
+                        @if (User.IsInRole("seller"))
                         {
                             <a href="/Products/Edit?id=@item.id" class="btn btn-primary btn-sm">Edit</a>
                             <a href="/Products/Delete?id=@item.id" class="btn btn-danger btn-sm">Delete</a>

@@ -3,41 +3,74 @@
 @{
 }
 
+@if (User.IsInRole("admin"))
+{
+    <br />
+    <h2>List of Users</h2>
 
-<br />
-<h2>List of Users</h2>
+    <a class="btn btn-primary btn-sm" href="/Users/Create">New User</a>
 
-<a class="btn btn-primary btn-sm" href="/Users/Create">New User</a>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
-            <th>Password</th>
-            <th>Actions</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ( var item in Model.ListofUsers)
-        {
+    <table class="table">
+        <thead>
             <tr>
-                <td>@item.id</td>
-                <td>@item.name</td>
-                <td>@item.email</td>
-                <td>@item.phone</td>
-                <td>@item.address</td>
-                <td>@item.password</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="/Users/Edit?id=@item.id">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Users/Delete?id=@item.id">Delete</a>
-                </td>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Password</th>
+                <th>Actions</th>
             </tr>
-            
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ListofUsers)
+            {
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.name</td>
+                    <td>@item.email</td>
+                    <td>@item.phone</td>
+                    <td>@item.address</td>
+                    <td>@item.password</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/Users/Edit?id=@item.id">Edit</a>
+
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a class="btn btn-danger btn-sm" href="/Users/Delete?id=@item.id">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    @foreach (var item in Model.ListofUsers)
+    {
+        <div>
+            <h2>Account Management</h2>
+            <p>Welcome, @item.name!</p>
+            <div class="mb-3">
+                <label class="fw-bold">Name</label>
+                <p>@item.name</p>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">Email</label>
+                <p>@item.email</p>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">Phone</label>
+                <p>@item.phone</p>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">Address</label>
+                <p>@item.address</p>
+            </div>
+            <div>
+                <a class="btn btn-primary btn-sm" href="/Users/Edit?id=@item.id">Edit Account Information</a>
+            </div>
+        </div>
+    }
+}

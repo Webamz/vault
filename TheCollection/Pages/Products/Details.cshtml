@@ -1,0 +1,93 @@
+﻿@page
+@model TheCollection.Pages.Products.DetailsModel
+@{
+}
+
+<br />
+<h2 class="mb-4">Details of Product</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">@Model.productInfo.name</h5>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <img src="@Model.productInfo.image" class="img-fluid" alt="@Model.productInfo.name">
+            </div>
+            <div class="col-md-8">
+                <div class="mb-2">
+                    <label class="fw-bold">Description</label>
+                    <p>@Model.productInfo.desc</p>
+                </div>
+
+                <div class="mb-2">
+                    <label class="fw-bold">Price</label>
+                    <p>@Model.productInfo.price</p>
+                </div>
+
+                @if (User.IsInRole("admin") || User.IsInRole("seller"))
+                {
+                    <div class="mb-2">
+                        <label class="fw-bold">In-stock</label>
+                        <p>@Model.productInfo.instock</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="mb-2">
+                        <label class="fw-bold">Availability</label>
+                        @if (int.TryParse(Model.productInfo.instock, out int instockValue))
+                        {
+                            <p class="text-success">@((instockValue > 0) ? "Available" : "Not Available")</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger">Not Available</p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card-footer d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-primary">@Model.ListofCategories.FirstOrDefault(c => c.id == Model.productInfo.category)?.name</span>
+        </div>
+        <div>
+                <button id="addToCartButton" class="btn btn-primary">Add to Cart</button>
+        </div>
+    </div>
+</div>
+
+@*
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#addToCartButton").click(function () {
+                // Assuming you have the productId available
+                var productId = "@Model.productInfo.id";
+
+                // Make an AJAX request to add the product to the cart
+                $.ajax({
+                    type: "POST",
+                    url: "/Cart/AddToCart",
+                    data: { productId: productId },
+                    success: function (result) {
+                        // Update the cart count in the UI
+                        $("#cartItemCount").text(result.cartItemCount);
+                    },
+                    error: function (error) {
+                        console.error("Error adding to cart:", error);
+                    }
+                });
+            });
+        });
+    </script>
+    }*@

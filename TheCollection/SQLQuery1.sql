@@ -6,19 +6,19 @@
 -- );
 
 
-CREATE TABLE products
-(
-    product_id INT NOT NULL PRIMARY KEY IDENTITY,
-    product_name VARCHAR(50) NOT NULL,
-    product_description VARCHAR(100) NOT NULL,
-    product_price FLOAT NOT NULL,
-    product_instock INT NOT NULL,
-    product_image VARCHAR(100) NOT NULL,
-    product_category INT NOT NULL,
-    seller INT NOT NULL,
-    FOREIGN KEY (seller) REFERENCES sellers(seller_id),
-    FOREIGN KEY (product_category) REFERENCES category(category_id)
-);
+--CREATE TABLE products
+--(
+--    product_id INT NOT NULL PRIMARY KEY IDENTITY,
+--    product_name VARCHAR(50) NOT NULL,
+--    product_description VARCHAR(100) NOT NULL,
+--    product_price FLOAT NOT NULL,
+--    product_instock INT NOT NULL,
+--    product_image VARCHAR(100) NOT NULL,
+--    product_category INT NOT NULL,
+--    seller INT NOT NULL,
+--    FOREIGN KEY (seller) REFERENCES sellers(seller_id),
+--    FOREIGN KEY (product_category) REFERENCES category(category_id)
+--);
 
 --CREATE TABLE sellers(
 --seller_id INT NOT NULL PRIMARY KEY IDENTITY,
@@ -29,6 +29,7 @@ CREATE TABLE products
 
 --CREATE TABLE orders(
 --order_id INT NOT NULL PRIMARY KEY IDENTITY,
+--buyer_id INT NOT NULL,
 --product_id INT NOT NULL,
 --seller_id INT NOT NULL,
 --order_price float(53)
