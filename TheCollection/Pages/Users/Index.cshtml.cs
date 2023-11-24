@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace TheCollection.Pages.Users
 {
+    [Authorize(AuthenticationSchemes = "MyCookieAuth", Policy = "RequireAdminRole")]
     public class IndexModel : PageModel
     {
         public List<UserInfo> ListofUsers = new List<UserInfo>();
@@ -59,6 +61,7 @@ namespace TheCollection.Pages.Users
         public string phone;
         public string address;
         public string password;
+        public string role;
 
     }
 }

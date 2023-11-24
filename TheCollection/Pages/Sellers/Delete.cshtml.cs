@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace TheVault.Pages.Sellers
 {
+    [Authorize(AuthenticationSchemes = "MyCookieAuth", Policy = "RequireAdminRole")]
     public class DeleteModel : PageModel
     {
         public SellerInfo sellerInfo = new SellerInfo();

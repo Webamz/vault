@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace TheCollection.Pages.Users
 {
+    [Authorize(AuthenticationSchemes = "MyCookieAuth", Policy = "RequireAdminRole")]
     public class CreateModel : PageModel
     {
         public UserInfo userInfo = new UserInfo();
@@ -35,8 +37,9 @@ namespace TheCollection.Pages.Users
                 using (SqlConnection con = new SqlConnection(conString))
                 {
                     con.Open();
+                    int role_id = 3;
 
-                    string sqlQuery = "INSERT INTO users(user_name, user_email, user_phone, user_address, user_password) VALUES(@name, @email, @phone, @address, @password)";
+                    string sqlQuery = "INSERT INTO users(user_name, user_email, user_phone, user_address, user_password, user_role) VALUES(@name, @email, @phone, @address, @password, @role_id)";
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                     {
                         cmd.Parameters.AddWithValue("@name", userInfo.name);
@@ -44,6 +47,8 @@ namespace TheCollection.Pages.Users
                         cmd.Parameters.AddWithValue("@phone", userInfo.phone);
                         cmd.Parameters.AddWithValue("@address", userInfo.address);
                         cmd.Parameters.AddWithValue("@password", userInfo.password);
+                        cmd.Parameters.AddWithValue("@role_id", role_id);
+
 
 
                         cmd.ExecuteNonQuery();

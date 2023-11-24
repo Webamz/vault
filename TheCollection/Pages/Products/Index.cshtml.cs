@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace TheVault.Pages.Products
 {
+    [AllowAnonymous]
     public class IndexModel : PageModel
     {
         public List<ProductInfo> ListofProducts = new List<ProductInfo>();
@@ -35,6 +37,7 @@ namespace TheVault.Pages.Products
                                 productInfo.instock = reader["product_instock"].ToString();
                                 productInfo.image = reader["product_image"].ToString();
                                 productInfo.category = reader["product_category"].ToString();
+                                productInfo.category = reader["seller_id"].ToString();
 
                                 ListofProducts.Add(productInfo);
                             }
@@ -61,5 +64,6 @@ namespace TheVault.Pages.Products
         public string instock;
         public string image;
         public string category;
+        public string seller;
     }
 }

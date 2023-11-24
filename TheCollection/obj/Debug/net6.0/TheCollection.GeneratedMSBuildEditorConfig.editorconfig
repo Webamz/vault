@@ -15,8 +15,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\iradu\Desktop\dotNet\aa_project\vault\TheCollection
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Accounts/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcQWNjZXNzRGVuaWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Accounts/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Accounts/LogOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudHNcTG9nT3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/HRManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSFJNYW5hZ2VyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/humanresource.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcaHVtYW5yZXNvdXJjZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Index.cshtml]
@@ -73,6 +93,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Sellers/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2VsbGVyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Settings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2V0dGluZ3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Shared/_LoginStatusPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9Mb2dpblN0YXR1c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Shared/_ValidationScriptsPartial.cshtml]

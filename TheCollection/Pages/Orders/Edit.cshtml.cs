@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace TheVault.Pages.Orders
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         public OrderInfo orderInfo = new OrderInfo();

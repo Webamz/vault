@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.SqlClient;
 
 namespace TheVault.Pages.Sellers
 {
+    [Authorize(AuthenticationSchemes = "MyCookieAuth")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class CreateModel : PageModel
     {
         public SellerInfo SellerInfo = new SellerInfo();
