@@ -10,29 +10,51 @@ namespace TheVault.Pages.Products
     public class CreateModel : PageModel
     {
         public ProductInfo productInfo = new ProductInfo();
+        public CategoryInfo categoryInfo = new CategoryInfo();
+        public List<CategoryInfo> ListofCategories = new List<CategoryInfo>();
         public string errorMessage = "";
         public string successMessage = "";
         public void OnGet()
         {
-            // Check the user's role
-            if (User.IsInRole("seller"))
+            string conString = "Data Source=.;Initial Catalog=vault_ecommerce;Integrated Security=True";
+            using (SqlConnection con = new SqlConnection(conString))
             {
-                // If the user is a seller, set the sellerId based on their ID
-                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-                if (userIdClaim != null)
+                con.Open();
+                string sqlQuery2 = "SELECT * FROM category";
+
+                using (SqlCommand cmd = new SqlCommand(sqlQuery2, con))
                 {
-                    productInfo.seller = userIdClaim.Value.Trim();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            CategoryInfo categoryInfo = new CategoryInfo();
+                            categoryInfo.id = reader["category_id"].ToString();
+                            categoryInfo.name = reader["category_name"].ToString();
+
+                            ListofCategories.Add(categoryInfo);
+                        }
+                    }
                 }
-            }
-            else
-            {
-                // If the user is an admin, you may leave sellerId empty or provide a way to input it
-                // productInfo.sellerId = ""; // Set it as needed for your application
+
             }
         }
 
         public void OnPost()
         {
+            if (User.IsInRole("seller"))
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim != null)
+                {
+                    productInfo.seller = userIdClaim.Value.ToString();
+                }
+            }
+            else
+            {
+                productInfo.seller = Request.Form["seller"];
+
+            }
             productInfo.name = Request.Form["name"];
             productInfo.desc = Request.Form["description"];
             productInfo.price = Request.Form["price"];
@@ -50,6 +72,9 @@ namespace TheVault.Pages.Products
 
             // Print or log the seller value to check if it has a valid value
             Console.WriteLine($"Seller ID: {productInfo.seller}");
+            Console.WriteLine($"Role: {User.FindFirst(ClaimTypes.Role)}");
+
+
 
             //saving the data
             try
@@ -58,7 +83,25 @@ namespace TheVault.Pages.Products
                 using (SqlConnection con = new SqlConnection(conString))
                 {
                     con.Open();
-                    string sqlQuery = "INSERT INTO products(product_name, product_description, product_price, product_instock, product_image, product_category, userid)" +
+                    string sqlQuery2 = "SELECT * FROM category";
+
+                    using (SqlCommand cmd = new SqlCommand(sqlQuery2, con))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                CategoryInfo categoryInfo = new CategoryInfo();
+                                categoryInfo.id = reader["category_id"].ToString();
+                                categoryInfo.id = reader["category_name"].ToString();
+
+                                ListofCategories.Add(categoryInfo);
+                            }
+                        }
+                    }
+
+
+                    string sqlQuery = "INSERT INTO products(product_name, product_description, product_price, product_instock, product_image, product_category, seller)" +
                             "VALUES(@name, @desc, @price, @instock, @image, @category, @sellerId)";
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                     {

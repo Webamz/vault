@@ -1,4 +1,11 @@
-﻿DROP TABLE products;
+﻿
+
+--CREATE TABLE category(
+-- category_id INT NOT NULL PRIMARY KEY IDENTITY,
+-- category_name VARCHAR(50) NOT NULL
+-- );
+
+
 CREATE TABLE products
 (
     product_id INT NOT NULL PRIMARY KEY IDENTITY,
@@ -7,9 +14,10 @@ CREATE TABLE products
     product_price FLOAT NOT NULL,
     product_instock INT NOT NULL,
     product_image VARCHAR(100) NOT NULL,
-    product_category VARCHAR(50) NOT NULL,
-    product_seller INT NOT NULL,
-    FOREIGN KEY (product_seller) REFERENCES sellers(seller_id)
+    product_category INT NOT NULL,
+    seller INT NOT NULL,
+    FOREIGN KEY (seller) REFERENCES sellers(seller_id),
+    FOREIGN KEY (product_category) REFERENCES category(category_id)
 );
 
 --CREATE TABLE sellers(

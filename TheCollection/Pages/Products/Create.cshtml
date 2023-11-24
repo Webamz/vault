@@ -50,12 +50,27 @@
         </div>
     </div>
 
-      <div class="row mb-3">
+    <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Category</label>
         <div class="col-sm-6">
-            <input type="text" class="form-control" name="category" value="@Model.productInfo.category" />
+            <select class="form-control" name="category">
+                @foreach (var category in @Model.ListofCategories)
+                {
+                    <option value="@category.id">@category.name</option>
+                }
+            </select>
         </div>
     </div>
+
+    @if (User.IsInRole("admin"))
+    {
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Seller</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="seller" value="@Model.productInfo.seller" />
+            </div>
+        </div>
+    }
 
  @if(Model.successMessage.Length > 0)
 {

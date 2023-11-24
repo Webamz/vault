@@ -13,7 +13,6 @@ namespace TheVault.Pages.Products
         public void OnGet()
         {
             ListofProducts.Clear();
-
             try
             {
                 string conString = "Data Source=.;Initial Catalog=vault_ecommerce;Integrated Security=True";
@@ -37,7 +36,6 @@ namespace TheVault.Pages.Products
                                 productInfo.instock = reader["product_instock"].ToString();
                                 productInfo.image = reader["product_image"].ToString();
                                 productInfo.category = reader["product_category"].ToString();
-                                productInfo.category = reader["seller_id"].ToString();
 
                                 ListofProducts.Add(productInfo);
                             }
@@ -65,5 +63,11 @@ namespace TheVault.Pages.Products
         public string image;
         public string category;
         public string seller;
+    }
+
+    public class CategoryInfo
+    {
+        public string id;
+        public string name;
     }
 }
