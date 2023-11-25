@@ -1,29 +1,42 @@
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using TheCollection.Pages.Products;
 
 namespace TheCollection.Pages
 {
     public class CartModel : PageModel
     {
-        public List<CartItem> CartItems { get; set; } = new List<CartItem>();
+        public List<ProductInfo> CartItems { get; set; }
+        public decimal TotalPrice { get; set; }
 
         public void OnGet()
         {
-            // Retrieve cart items logic goes here
-            // Example: CartItems = GetCartItems();
-            CartItem cart = new CartItem();
-            cart.Name = "Hello";
-            cart.Price = 1000;
-            CartItems.Add(cart);
+            CartItems = DetailsModel.CartItems;
+            CalculateTotalPrice();
         }
 
+        public IActionResult OnPostRemoveFromCart(string productId)
+        {
+            CartItems = DetailsModel.CartItems;
 
-    }
+            if (!string.IsNullOrEmpty(productId))
+            {
+                var productToRemove = CartItems.FirstOrDefault(p => p.id == productId);
+                if (productToRemove != null)
+                {
+                    CartItems.Remove(productToRemove);
+                    CalculateTotalPrice();
+                }
+            }
 
-    public class CartItem
-    {
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        // Add other necessary properties
+            // Redirect back to the cart page
+            return RedirectToPage();
+        }
+
+        private void CalculateTotalPrice()
+        {
+            TotalPrice = CartItems.Sum(item => decimal.Parse(item.price));
+        }
     }
 }

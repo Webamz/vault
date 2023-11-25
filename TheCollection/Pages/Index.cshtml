@@ -1,10 +1,81 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "TheCollection - Your Ultimate Shopping Destination";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Add your custom styles or link to your CSS file here -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #495057;
+        }
+
+        header {
+            background-color: #343a40;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #ffffff;
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .main-content {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .main-content h1 {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .main-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #6c757d;
+        }
+
+        .main-content a {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-content a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>@ViewData["Title"]</h1>
+</header>
+
+<div class="main-content">
+    <h1>Welcome to TheCollection</h1>
+    <p>Discover a world of incredible products. Your ultimate shopping experience awaits!</p>
+    <a href="/Products/Index" class="btn btn-primary btn-lg">Explore Products</a>
 </div>
+
+</body>
+</html>

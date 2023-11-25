@@ -60,34 +60,10 @@
         <div>
             <span class="badge bg-primary">@Model.ListofCategories.FirstOrDefault(c => c.id == Model.productInfo.category)?.name</span>
         </div>
-        <div>
-                <button id="addToCartButton" class="btn btn-primary">Add to Cart</button>
-        </div>
+<form method="post">
+    <input type="hidden" name="productId" value="@Model.productInfo.id" />
+    <button type="submit" class="btn btn-primary add-to-cart">Add to Cart</button>
+</form>
     </div>
 </div>
 
-@*
-@section scripts {
-    <script>
-        $(document).ready(function () {
-            $("#addToCartButton").click(function () {
-                // Assuming you have the productId available
-                var productId = "@Model.productInfo.id";
-
-                // Make an AJAX request to add the product to the cart
-                $.ajax({
-                    type: "POST",
-                    url: "/Cart/AddToCart",
-                    data: { productId: productId },
-                    success: function (result) {
-                        // Update the cart count in the UI
-                        $("#cartItemCount").text(result.cartItemCount);
-                    },
-                    error: function (error) {
-                        console.error("Error adding to cart:", error);
-                    }
-                });
-            });
-        });
-    </script>
-    }*@

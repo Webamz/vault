@@ -126,7 +126,7 @@ namespace TheVault.Pages.Products
                 return;
             }
             productInfo.name = ""; productInfo.desc = ""; productInfo.price = "";
-            productInfo.image = ""; productInfo.category = ""; productInfo.instock = "";
+            productInfo.image = "";  productInfo.instock = "";
             successMessage = "New Product Added successfully";
 
             Response.Redirect("/Products/Index");

@@ -1,20 +1,52 @@
 ﻿@page
 @model TheCollection.Pages.CartModel
-@{
-}
 
-<h2>Your Cart</h2>
+<h2 class="mb-4">Shopping Cart</h2>
 
 @if (Model.CartItems.Count > 0)
 {
-    <ul>
-        @foreach (var item in Model.CartItems)
-        {
-            <li>@item.Name - @item.Price</li>
-        }
-    </ul>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Action</th>
+                <!-- Add other columns as needed -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var productGroup in Model.CartItems.GroupBy(p => p.id))
+            {
+                var product = productGroup.First(); // Take the first item of the group
+
+                <tr>
+                    <td>@product.id</td>
+                    <td>@product.name</td>
+                    <td>@product.desc</td>
+                    <td>@product.price</td>
+                    <td>@productGroup.Count()</td>
+                    <td>
+                        <form method="post" asp-page-handler="RemoveFromCart">
+                            <input type="hidden" name="productId" value="@product.id" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                    <!-- Add other cells as needed -->
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <p>Total Price: $@Model.TotalPrice</p>
+
+    <a asp-page="/Orders/Create" class="btn btn-primary">Proceed to Order</a>
 }
 else
 {
     <p>Your cart is empty.</p>
 }
+
+

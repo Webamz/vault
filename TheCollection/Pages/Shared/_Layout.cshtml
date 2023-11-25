@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TheVault</title>
+    <title>@ViewData["Title"] - TheCollection</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/TheVault.styles.css" asp-append-version="true" />
@@ -29,7 +29,7 @@
         <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Products</a>
     </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Index">Users</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Index">Account</a>
         </li>
 
     @if(User.IsInRole("seller"))
@@ -50,7 +50,7 @@
             <a class="nav-link text-dark" asp-area="" asp-page="/Orders/Index">Orders</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Index">Users</a>
+            <a class="nav-link text-dark" asp-area="" asp-page="/Users/Index">Account</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-page="/HRManager">HRManagement</a>
