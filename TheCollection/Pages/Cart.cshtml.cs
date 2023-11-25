@@ -1,6 +1,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using TheCollection.Pages.Products;
 
 namespace TheCollection.Pages
@@ -32,6 +33,7 @@ namespace TheCollection.Pages
 
             // Redirect back to the cart page
             return RedirectToPage();
+
         }
 
         private void CalculateTotalPrice()
@@ -40,3 +42,4 @@ namespace TheCollection.Pages
         }
     }
 }
+

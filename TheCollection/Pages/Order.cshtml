@@ -1,0 +1,55 @@
+﻿@page
+@model TheCollection.Pages.OrderModel
+@{
+}
+
+<h2 class="mb-4">Order Summary</h2>
+
+@if (Model.CartItems != null && Model.CartItems.Any())
+{
+    <form method="post" asp-page-handler="ConfirmOrder">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <!-- Add other columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var productGroup in Model.CartItems.GroupBy(p => p.id))
+                {
+                    var product = productGroup.First();
+                    var quantity = productGroup.Count();
+
+                    <tr>
+                        <td>@product.id</td>
+                        <td>@product.name</td>
+                        <td>@product.desc</td>
+                        <td>@product.price</td>
+                        <td>@quantity</td>
+                        <td>$@(decimal.Parse(product.price) * quantity)</td>
+                        <!-- Add other cells as needed -->
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"></td>
+                    <td>Total Price:</td>
+                    <td>$@Model.TotalPrice</td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Confirm Order</button>
+    </form>
+}
+else
+{
+    <p>No items in the order.</p>
+}

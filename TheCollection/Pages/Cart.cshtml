@@ -1,4 +1,5 @@
 ﻿@page
+@using Newtonsoft.Json
 @model TheCollection.Pages.CartModel
 
 <h2 class="mb-4">Shopping Cart</h2>
@@ -42,7 +43,9 @@
 
     <p>Total Price: $@Model.TotalPrice</p>
 
-    <a asp-page="/Orders/Create" class="btn btn-primary">Proceed to Order</a>
+<a asp-page="/Order" asp-route-cartItems="@Uri.EscapeDataString(JsonConvert.SerializeObject(Model.CartItems))" asp-route-totalPrice="@Model.TotalPrice" class="btn btn-primary">Proceed to Order</a>
+
+
 }
 else
 {
