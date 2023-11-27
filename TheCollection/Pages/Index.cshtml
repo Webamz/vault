@@ -10,57 +10,168 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
-    <!-- Add your custom styles or link to your CSS file here -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-waZLe3Nim9J+R4qXCjG6iaK5teb25XtWh0f5iCvvlKnUIjsaG0XsZt8TVZUq96ltl1R3J5MawB/ln8XKfPVxxA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f8f9fa;
             color: #495057;
+            line-height: 1.6;
         }
 
         header {
             background-color: #343a40;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: #ffffff;
         }
 
         header h1 {
-            color: #ffffff;
-            font-size: 2em;
+            font-size: 3.5em;
             margin: 0;
         }
 
         .main-content {
             text-align: center;
             padding: 50px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            background-color: #ffffff;
+            margin: 20px;
         }
 
         .main-content h1 {
-            font-size: 3em;
+            font-size: 4.5em;
             color: #007bff;
             margin-bottom: 20px;
         }
 
         .main-content p {
-            font-size: 1.2em;
+            font-size: 1.8em;
             margin-bottom: 30px;
             color: #6c757d;
         }
 
         .main-content a {
             display: inline-block;
-            padding: 10px 20px;
-            font-size: 1.2em;
+            padding: 20px 40px;
+            font-size: 1.8em;
             text-decoration: none;
             color: #ffffff;
             background-color: #007bff;
-            border-radius: 5px;
+            border-radius: 10px;
             transition: background-color 0.3s ease;
         }
 
         .main-content a:hover {
+            background-color: #0056b3;
+        }
+
+        .featured-products {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .product {
+            margin: 20px;
+            text-align: left;
+            max-width: 400px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: scale(1.03);
+        }
+
+        .product img {
+            width: 100%;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .product-content {
+            padding: 20px;
+        }
+
+        .product h3 {
+            font-size: 2.5em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .product p {
+            font-size: 1.6em;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .product a {
+            display: block;
+            padding: 15px 30px;
+            font-size: 1.6em;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #007bff;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .product a:hover {
+            background-color: #0056b3;
+        }
+
+        .account-section {
+            background-color: #f8f9fa;
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .account-section h2 {
+            font-size: 3em;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+
+        .account-section p {
+            font-size: 1.8em;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .account-buttons {
+            display: flex;
+            justify-content: center;
+        }
+
+        .account-buttons .btn {
+            margin: 0 20px;
+            padding: 20px 40px;
+            font-size: 1.8em;
+            text-decoration: none;
+            color: #ffffff;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .account-buttons .btn-primary {
+            background-color: #007bff;
+        }
+
+        .account-buttons .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .account-buttons .btn:hover {
             background-color: #0056b3;
         }
     </style>
@@ -75,6 +186,31 @@
     <h1>Welcome to TheCollection</h1>
     <p>Discover a world of incredible products. Your ultimate shopping experience awaits!</p>
     <a href="/Products/Index" class="btn btn-primary btn-lg">Explore Products</a>
+</div>
+
+<div class="featured-products">
+    <div class="product">
+        <img src="product1.jpg" alt="Product 1">
+        <div class="product-content">
+            <h3>Product 1</h3>
+            <p>Discover the amazing features of our flagship product. Limited stock available!</p>
+            <a href="/Products/Product1" class="btn btn-primary btn-lg">Learn More <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+    <!-- Add similar structure for other featured products -->
+
+</div>
+
+<div class="account-section">
+    <div class="container">
+        <h2>Create an Account</h2>
+        <p>Join TheCollection for personalized shopping and exclusive offers.</p>
+        <div class="account-buttons">
+            <a href="/Account/Register" class="btn btn-primary btn-lg">Sign Up</a>
+            <a href="/Account/Login" class="btn btn-secondary btn-lg">Log In</a>
+        </div>
+    </div>
 </div>
 
 </body>

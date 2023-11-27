@@ -21,20 +21,13 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireAdminOrSellerRole", policy =>{ policy.RequireRole("admin", "seller");});
 
 
-    options.AddPolicy("MustBelongToHRDepartment",
-        policy => policy.RequireClaim("Department", "HR"));
 
     options.AddPolicy("SellerAdmin",
         policy => policy.RequireClaim("Seller", "seller"));
 
-    options.AddPolicy("HRManagerOnly",
-      policy => policy.RequireClaim("Department", "HR")
-      .RequireClaim("ManagerOnly")
-      .Requirements.Add(new HRManagerProbationRequirement(3)));
 
 });
 
-builder.Services.AddSingleton<IAuthorizationHandler, HRManagerProbationRequirementHandler>();
 
 builder.Services.AddRazorPages();
 

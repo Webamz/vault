@@ -1,6 +1,4 @@
-﻿
-
---CREATE TABLE category(
+﻿--CREATE TABLE category(
 -- category_id INT NOT NULL PRIMARY KEY IDENTITY,
 -- category_name VARCHAR(50) NOT NULL
 -- );
@@ -21,19 +19,15 @@
 --);
 
 --CREATE TABLE sellers(
---seller_id INT NOT NULL PRIMARY KEY IDENTITY,
+--id INT NOT NULL PRIMARY KEY IDENTITY,
 --seller_name VARCHAR(50) NOT NULL,
 --seller_email VARCHAR(50) NOT NULL UNIQUE,
 --seller_phone VARCHAR(20) NULL,
---seller_address VARCHAR (50) NULL);
-
---CREATE TABLE orders(
---order_id INT NOT NULL PRIMARY KEY IDENTITY,
---buyer_id INT NOT NULL,
---product_id INT NOT NULL,
+--seller_address VARCHAR (50) NULL,
 --seller_id INT NOT NULL,
---order_price float(53)
---);
+--FOREIGN KEY (seller_id) REFERENCES users(user_id));
+
+
 --CREATE TABLE users(
 --user_id INT NOT NULL PRIMARY KEY IDENTITY,
 --user_email VARCHAR(50) NOT NULL UNIQUE,
@@ -45,7 +39,19 @@
 --);
 
 
- --CREATE TABLE roles(
- --role_id INT NOT NULL PRIMARY KEY,
- --role_name VARCHAR(50) NOT NULL
- --);
+-- CREATE TABLE roles(
+-- role_id INT NOT NULL PRIMARY KEY,
+-- role_name VARCHAR(50) NOT NULL
+-- );
+
+-- CREATE TABLE orders(
+--order_id INT NOT NULL PRIMARY KEY IDENTITY,
+--customer_id INT NOT NULL,
+--product_id INT,
+--quantity INT,
+--total_price DECIMAL(10,2) NOT NULL,
+--order_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--FOREIGN KEY (customer_id) REFERENCES users(user_id),
+--FOREIGN KEY (product_id) REFERENCES products(product_id));
+
+

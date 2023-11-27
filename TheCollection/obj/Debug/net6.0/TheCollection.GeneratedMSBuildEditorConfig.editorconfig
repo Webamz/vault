@@ -35,14 +35,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/HRManager.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSFJNYW5hZ2VyLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/humanresource.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcaHVtYW5yZXNvdXJjZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -51,16 +43,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Orders/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJzXENyZWF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Orders/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJzXERlbGV0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Orders/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJzXEVkaXQuY3NodG1s
+[C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/OrderSuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJTdWNjZXNzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/iradu/Desktop/dotNet/aa_project/vault/TheCollection/Pages/Orders/Index.cshtml]

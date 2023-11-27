@@ -19,22 +19,17 @@ else
         <!-- ... existing code ... -->
         
         <!-- Cart Icon and Count -->
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="/Cart">
-                <i class="bi bi-cart"></i> Cart <span class="badge bg-secondary">@ViewData["CartItemCount"]</span>
-            </a>
-
-@*            <span class="badge bg-secondary" id="cartItemCount">@Model.CartItemCount</span>
-*@
-        </li>
+ 
 
         <form method="post" class="form-inline" asp-page="/Accounts/Logout">
-            Welcome @User.Identity.Name
+            Welcome!
             <button type="submit" class="m-lg-2 btn btn-link">Logout</button>
         </form>
     }
     else
     {
         <a class="btn btn-link" asp-page="/Accounts/Login">Login</a>
+        <a class="btn btn-link" asp-page="/Users/Create">Register Account</a>
+
     }
 </div>

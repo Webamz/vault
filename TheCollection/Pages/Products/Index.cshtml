@@ -5,13 +5,34 @@
 
 <style>
     .card-img-top {
-        height: 500px; /* Set the desired height */
-        object-fit: cover; /* Ensure the image covers the specified height */
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .product-title {
+        background-color: #007bff;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        font-size: 2.5em;
+        margin-bottom: 30px;
+    }
+
+    .product-card {
+        margin-bottom: 30px;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
 
 <div class="container">
-    <h2 class="mt-4">List of Products</h2>
+    <div class="product-title">
+        <h2>Our Amazing Products</h2>
+    </div>
 
     @if (User.IsInRole("admin") || User.IsInRole("seller"))
     {
@@ -19,9 +40,28 @@
     }
 
     <div class="row">
+        <div class="col-md-4 offset-md-8 mb-4">
+            <form method="get" action="/Products/Index">
+                <div class="input-group">
+                    <select class="form-control" name="categoryFilter">
+                        <option value="">All Categories</option>
+                        @foreach (var category in Model.ListofCategories)
+                        {
+                            <option value="@category.id">@category.name</option>
+                        }
+                    </select>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
         @foreach (var item in Model.ListofProducts)
         {
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4 product-card">
                 <div class="card">
                     <img src="@item.image" class="card-img-top" alt="@item.name">
                     <div class="card-body">
@@ -31,7 +71,7 @@
                             <li class="list-group-item">
                                 @if (User.IsInRole("admin") || User.IsInRole("seller"))
                                 {
-                                    <span class="text-info">Instock: @item.instock</span>
+                                    <span class="text-info">In Stock: @item.instock</span>
                                 }
                                 else if (int.TryParse(item.instock, out int instockValue) && instockValue > 0)
                                 {

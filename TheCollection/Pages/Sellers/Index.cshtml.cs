@@ -5,13 +5,13 @@ using System.Data.SqlClient;
 
 namespace TheVault.Pages.Sellers
 {
-    [Authorize(AuthenticationSchemes = "MyCookieAuth", Policy = "RequireAdminRole")]
+    [Authorize(AuthenticationSchemes = "MyCookieAuth", Policy = "RequireAdminOrSellerRole")]
     public class IndexModel : PageModel
     {
         public List<SellerInfo> ListofSellers = new List<SellerInfo>();
+
         public void OnGet()
         {
-
             ListofSellers.Clear();
 
             try
@@ -21,8 +21,8 @@ namespace TheVault.Pages.Sellers
                 using (SqlConnection con = new SqlConnection(conString))
                 {
                     con.Open();
-                    string sqlQuery = "SELECT * FROM sellers";
 
+                    string sqlQuery = "SELECT seller_id, seller_name, seller_email, seller_phone, seller_address FROM sellers";
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -35,20 +35,17 @@ namespace TheVault.Pages.Sellers
                                 sellerInfo.email = reader["seller_email"].ToString();
                                 sellerInfo.phone = reader["seller_phone"].ToString();
                                 sellerInfo.address = reader["seller_address"].ToString();
-                                
+
                                 ListofSellers.Add(sellerInfo);
                             }
                         }
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
-
         }
     }
 
@@ -59,7 +56,5 @@ namespace TheVault.Pages.Sellers
         public string email;
         public string phone;
         public string address;
-
     }
 }
-

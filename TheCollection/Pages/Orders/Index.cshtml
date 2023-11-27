@@ -3,37 +3,37 @@
 @{
 }
 
-
 <br />
-<h2>List of Orders</h2>
-
-<a class="btn btn-primary btn-sm" href="/Orders/Create">New Order</a>
+<h2>Order History</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Product Id</th>
-            <th>Seller Id</th>
-            <th>Order Price</th>
-            <th>Actions</th>
-
+            <th>Order ID</th>
+            @if (User.IsInRole("admin"))
+            {
+                <th>Customer Name</th>
+            }
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Order Date</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ( var item in Model.ListofOrders)
+        @foreach (var item in Model.ListofOrders)
         {
             <tr>
-                <td>@item.id</td>
-                <td>@item.pdt_id</td>
-                <td>@item.seller_id</td>
-                <td>@item.order_price</td>
-                <td>
-                    <a class="btn btn-primary btn-sm" href="/Orders/Edit?id=@item.id">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="/Orders/Delete?id=@item.id">Delete</a>
-                </td>
+                <td>@item.Id</td>
+                @if (User.IsInRole("admin"))
+                {
+                    <td>@item.CustomerName</td>
+                }
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.TotalPrice</td>
+                <td>@item.OrderDate</td>
             </tr>
-            
         }
     </tbody>
 </table>

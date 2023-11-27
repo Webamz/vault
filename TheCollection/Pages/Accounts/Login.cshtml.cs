@@ -1,12 +1,15 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.SqlClient;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using System.Data.SqlClient;
-using System.Data;
 
 namespace TheCollection.Pages.Account
 {
@@ -26,7 +29,6 @@ namespace TheCollection.Pages.Account
         {
         }
 
-
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -39,20 +41,11 @@ namespace TheCollection.Pages.Account
             {
                 // Security context
                 var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, credential.username),
-            new Claim(ClaimTypes.NameIdentifier, userId), // Add the user's ID as a claim
-            new Claim("Department", "HR"),
-            new Claim("Admin", "true"),
-            new Claim("Manager", "true"),
-            new Claim("SellerAdmin", "seller"),
-            new Claim(ClaimTypes.Role, userRole) // Include the user role in claims
-        };
-                // Output claims for debugging
-                foreach (var claim in claims)
                 {
-                    Console.WriteLine($"Claim Type: {claim.Type}, Claim Value: {claim.Value}");
-                }
+                    new Claim(ClaimTypes.Name, credential.username),
+                    new Claim(ClaimTypes.NameIdentifier, userId),
+                    new Claim(ClaimTypes.Role, userRole)
+                };
 
                 var identity = new ClaimsIdentity(claims, "MyCookieAuth");
                 var claimsPrincipal = new ClaimsPrincipal(identity);
@@ -71,7 +64,6 @@ namespace TheCollection.Pages.Account
 
         private (bool, string, string) IsValidUser(string username, string password)
         {
-            // Retrieve user information from the database and verify the password
             string connectionString = "Data Source=.;Initial Catalog=vault_ecommerce;Integrated Security=True";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -87,25 +79,10 @@ namespace TheCollection.Pages.Account
                     {
                         if (reader.Read())
                         {
-                            // You may need to hash the stored password and compare it with the input password
                             string storedPassword = reader["user_password"].ToString();
-                            if (storedPassword == password)
+                            if (VerifyPassword(password, storedPassword))
                             {
-                                // Return the role, user ID, along with the validation result
-                                string role_name = "";
-                                if (reader["user_role"].ToString() == "1")
-                                {
-                                    role_name = "admin";
-                                }
-                                else if (reader["user_role"].ToString() == "2")
-                                {
-                                    role_name = "seller";
-                                }
-                                else if (reader["user_role"].ToString() == "3")
-                                {
-                                    role_name = "normal";
-                                }
-
+                                string role_name = GetRoleName(reader["user_role"].ToString());
                                 string userId = reader["user_id"].ToString();
 
                                 return (true, role_name, userId);
@@ -118,7 +95,32 @@ namespace TheCollection.Pages.Account
             return (false, null, null);
         }
 
+        private bool VerifyPassword(string enteredPassword, string storedHashedPassword)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] enteredPasswordBytes = Encoding.UTF8.GetBytes(enteredPassword);
+                byte[] hashedBytes = sha256.ComputeHash(enteredPasswordBytes);
+                string hashedPassword = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
 
+                return storedHashedPassword == hashedPassword;
+            }
+        }
+
+        private string GetRoleName(string roleId)
+        {
+            switch (roleId)
+            {
+                case "1":
+                    return "admin";
+                case "2":
+                    return "seller";
+                case "3":
+                    return "normal";
+                default:
+                    return "";
+            }
+        }
 
         public class Credential
         {
@@ -135,4 +137,3 @@ namespace TheCollection.Pages.Account
         }
     }
 }
-

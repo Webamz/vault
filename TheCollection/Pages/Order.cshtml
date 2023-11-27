@@ -1,5 +1,6 @@
 ﻿@page
 @model TheCollection.Pages.OrderModel
+@using Newtonsoft.Json;
 @{
 }
 
@@ -7,7 +8,7 @@
 
 @if (Model.CartItems != null && Model.CartItems.Any())
 {
-    <form method="post" asp-page-handler="ConfirmOrder">
+    <form method="post" >
         <table class="table">
             <thead>
                 <tr>
@@ -46,6 +47,12 @@
             </tfoot>
         </table>
 
+        <div class="mt-4">
+            <a asp-page="/Cart" class="btn btn-secondary">Back to Cart</a>
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">Cancel Order</button>
+        </div>
+    <input type="hidden" name="cartItems" value="@JsonConvert.SerializeObject(Model.CartItems)" />
+    <input type="hidden" name="totalPrice" value="@Model.TotalPrice" />
         <button type="submit" class="btn btn-primary">Confirm Order</button>
     </form>
 }
@@ -53,3 +60,24 @@ else
 {
     <p>No items in the order.</p>
 }
+
+
+@*<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to cancel this order?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+               <a asp-page="/Products" class="btn btn-danger">Yes, Cancel Order</a>
+
+            </div>
+        </div>
+    </div>
+</div>*@

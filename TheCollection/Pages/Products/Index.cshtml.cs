@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace TheVault.Pages.Products
 {
@@ -11,7 +14,7 @@ namespace TheVault.Pages.Products
         public List<ProductInfo> ListofProducts = new List<ProductInfo>();
         public List<CategoryInfo> ListofCategories = new List<CategoryInfo>();
 
-        public void OnGet()
+        public void OnGet(string categoryFilter)
         {
             ListofProducts.Clear();
             try
@@ -39,8 +42,12 @@ namespace TheVault.Pages.Products
                         }
                     }
 
-
                     string sqlQuery = "SELECT * FROM products";
+                    if (!string.IsNullOrEmpty(categoryFilter))
+                    {
+                        sqlQuery += $" WHERE product_category = '{categoryFilter}'";
+                    }
+
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -48,7 +55,7 @@ namespace TheVault.Pages.Products
                             while (reader.Read())
                             {
                                 ProductInfo productInfo = new ProductInfo();
-                                productInfo.id =  reader["product_id"].ToString();
+                                productInfo.id = reader["product_id"].ToString();
                                 productInfo.name = reader["product_name"].ToString();
                                 productInfo.desc = reader["product_description"].ToString();
                                 productInfo.price = reader["product_price"].ToString();
@@ -60,18 +67,15 @@ namespace TheVault.Pages.Products
                             }
                         }
                     }
-
                 }
-
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: " + ex.Message);
             }
-
         }
-
     }
+
     public class ProductInfo
     {
         public string id;
