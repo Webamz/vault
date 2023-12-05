@@ -29,38 +29,42 @@ namespace TheCollection.Pages.Account
         {
         }
 
-        public async Task<IActionResult> OnPostAsync()
+       public async Task<IActionResult> OnPostAsync()
+{
+    if (!ModelState.IsValid)
+        return Page();
+
+    // Verify credentials against the database
+    var (isValid, userRole, userId) = IsValidUser(credential.username, credential.password);
+
+    if (isValid)
+    {
+        // Security context
+        var claims = new List<Claim>
         {
-            if (!ModelState.IsValid)
-                return Page();
+            new Claim(ClaimTypes.Name, credential.username),
+            new Claim(ClaimTypes.NameIdentifier, userId),
+            new Claim(ClaimTypes.Role, userRole)
+        };
 
-            // Verify credentials against the database
-            var (isValid, userRole, userId) = IsValidUser(credential.username, credential.password);
+        var identity = new ClaimsIdentity(claims, "MyCookieAuth");
+        var claimsPrincipal = new ClaimsPrincipal(identity);
 
-            if (isValid)
-            {
-                // Security context
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, credential.username),
-                    new Claim(ClaimTypes.NameIdentifier, userId),
-                    new Claim(ClaimTypes.Role, userRole)
-                };
+        var authProperties = new AuthenticationProperties
+        {
+            IsPersistent = credential.rememberMe
+        };
 
-                var identity = new ClaimsIdentity(claims, "MyCookieAuth");
-                var claimsPrincipal = new ClaimsPrincipal(identity);
+        await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal, authProperties);
+        return RedirectToPage("/products/index");
+    }
 
-                var authProperties = new AuthenticationProperties
-                {
-                    IsPersistent = credential.rememberMe
-                };
+    // Show an alert message for incorrect credentials
+    ViewData["ErrorMessage"] = "Invalid username or password. Please try again.";
 
-                await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal, authProperties);
-                return RedirectToPage("/products/index");
-            }
+    return Page();
+}
 
-            return Page();
-        }
 
         private (bool, string, string) IsValidUser(string username, string password)
         {

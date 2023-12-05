@@ -6,6 +6,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,7 +31,7 @@
         }
 
         header h1 {
-            font-size: 3.5em;
+            font-size: 2.5em;
             margin: 0;
         }
 
@@ -44,108 +45,32 @@
         }
 
         .main-content h1 {
-            font-size: 4.5em;
+            font-size: 3em;
             color: #007bff;
             margin-bottom: 20px;
         }
 
         .main-content p {
-            font-size: 1.8em;
+            font-size: 1.6em;
             margin-bottom: 30px;
             color: #6c757d;
-        }
-
-        .main-content a {
-            display: inline-block;
-            padding: 20px 40px;
-            font-size: 1.8em;
-            text-decoration: none;
-            color: #ffffff;
-            background-color: #007bff;
-            border-radius: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .main-content a:hover {
-            background-color: #0056b3;
-        }
-
-        .featured-products {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .product {
-            margin: 20px;
-            text-align: left;
-            max-width: 400px;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .product:hover {
-            transform: scale(1.03);
-        }
-
-        .product img {
-            width: 100%;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-        }
-
-        .product-content {
-            padding: 20px;
-        }
-
-        .product h3 {
-            font-size: 2.5em;
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-
-        .product p {
-            font-size: 1.6em;
-            color: #6c757d;
-            margin-bottom: 20px;
-        }
-
-        .product a {
-            display: block;
-            padding: 15px 30px;
-            font-size: 1.6em;
-            text-decoration: none;
-            color: #ffffff;
-            background-color: #007bff;
-            border-radius: 8px;
-            text-align: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .product a:hover {
-            background-color: #0056b3;
         }
 
         .account-section {
-            background-color: #f8f9fa;
+            background-color: #007bff;
             padding: 50px 0;
             text-align: center;
+            color: #ffffff;
         }
 
         .account-section h2 {
-            font-size: 3em;
-            color: #007bff;
-            margin-bottom: 30px;
+            font-size: 2.5em;
+            margin-bottom: 20px;
         }
 
         .account-section p {
-            font-size: 1.8em;
-            color: #6c757d;
-            margin-bottom: 30px;
+            font-size: 1.6em;
+            margin-bottom: 20px;
         }
 
         .account-buttons {
@@ -155,20 +80,24 @@
 
         .account-buttons .btn {
             margin: 0 20px;
-            padding: 20px 40px;
-            font-size: 1.8em;
+            padding: 15px 30px;
+            font-size: 1.6em;
             text-decoration: none;
             color: #ffffff;
             border-radius: 10px;
             transition: background-color 0.3s ease;
+            cursor: pointer;
         }
 
         .account-buttons .btn-primary {
-            background-color: #007bff;
+            background-color: #ffffff;
+            color: #007bff;
+            border: 2px solid #007bff;
         }
 
         .account-buttons .btn-secondary {
             background-color: #6c757d;
+            border: 2px solid #6c757d;
         }
 
         .account-buttons .btn:hover {
@@ -176,42 +105,29 @@
         }
     </style>
 </head>
+
 <body>
 
-<header>
-    <h1>@ViewData["Title"]</h1>
-</header>
+    <header>
+        <h1>@ViewData["Title"]</h1>
+    </header>
 
-<div class="main-content">
-    <h1>Welcome to TheCollection</h1>
-    <p>Discover a world of incredible products. Your ultimate shopping experience awaits!</p>
-    <a href="/Products/Index" class="btn btn-primary btn-lg">Explore Products</a>
-</div>
-
-<div class="featured-products">
-    <div class="product">
-        <img src="product1.jpg" alt="Product 1">
-        <div class="product-content">
-            <h3>Product 1</h3>
-            <p>Discover the amazing features of our flagship product. Limited stock available!</p>
-            <a href="/Products/Product1" class="btn btn-primary btn-lg">Learn More <i class="fas fa-chevron-right"></i></a>
-        </div>
+    <div class="main-content">
+        <h1>Welcome to TheCollection</h1>
+        <p>Your ultimate shopping experience awaits! Sign up or log in to access personalized shopping and exclusive offers.</p>
     </div>
 
-    <!-- Add similar structure for other featured products -->
-
-</div>
-
-<div class="account-section">
-    <div class="container">
-        <h2>Create an Account</h2>
-        <p>Join TheCollection for personalized shopping and exclusive offers.</p>
-        <div class="account-buttons">
-            <a href="/Account/Register" class="btn btn-primary btn-lg">Sign Up</a>
-            <a href="/Account/Login" class="btn btn-secondary btn-lg">Log In</a>
+    <div class="account-section">
+        <div class="container">
+            <h2>Create an Account</h2>
+            <p>Sign up or log in to access personalized shopping and exclusive offers.</p>
+            <div class="account-buttons">
+                <a href="/Users/Create" class="btn btn-primary">Sign Up</a>
+                <a href="/Accounts/Login" class="btn btn-secondary">Log In</a>
+            </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>

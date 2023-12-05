@@ -34,7 +34,6 @@
                         <td>@product.price</td>
                         <td>@quantity</td>
                         <td>$@(decimal.Parse(product.price) * quantity)</td>
-                        <!-- Add other cells as needed -->
                     </tr>
                 }
             </tbody>
@@ -46,15 +45,27 @@
                 </tr>
             </tfoot>
         </table>
-
+     
         <div class="mt-4">
             <a asp-page="/Cart" class="btn btn-secondary">Back to Cart</a>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">Cancel Order</button>
-        </div>
-    <input type="hidden" name="cartItems" value="@JsonConvert.SerializeObject(Model.CartItems)" />
+       @*     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">Cancel Order</button>*@
+          <input type="hidden" name="cartItems" value="@JsonConvert.SerializeObject(Model.CartItems)" />
     <input type="hidden" name="totalPrice" value="@Model.TotalPrice" />
+
+     <div class="mb-3">
+        <label for="creditCardNumber" class="form-label">Credit Card Number</label>
+        <input type="text" class="form-control" id="creditCardNumber" name="creditCardNumber" required>
+    </div>
         <button type="submit" class="btn btn-primary">Confirm Order</button>
+        </div>
     </form>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger mt-3" role="alert">
+        @Model.ErrorMessage
+    </div>
+}
 }
 else
 {

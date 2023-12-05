@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using TheCollection.Authorization;
+using TheCollection.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSession();
+builder.Services.AddScoped<PaymentService>();
 builder.Services.AddAuthentication("MyCookieAuth").AddCookie("MyCookieAuth", options =>
 {
     options.Cookie.Name = "MyCookieAuth";

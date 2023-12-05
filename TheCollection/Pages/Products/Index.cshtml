@@ -4,59 +4,158 @@
 }
 
 <style>
-    .card-img-top {
-        height: 300px;
-        object-fit: cover;
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
     }
 
-    .product-title {
-        background-color: #007bff;
-        color: #ffffff;
-        padding: 20px;
+    .landing-header {
+        background-color: #343a40;
+        padding: 60px 0;
         text-align: center;
+        color: #ffffff;
+    }
+
+    .landing-title {
         font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    .landing-subtitle {
+        font-size: 1.3em;
+        color: #6c757d;
         margin-bottom: 30px;
+    }
+
+    .landing-button {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 1.4em;
+        text-decoration: none;
+        color: #ffffff;
+        background-color: #007bff;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .landing-button:hover {
+        background-color: #0056b3;
+    }
+
+    .container {
+        margin-top: 30px;
+    }
+
+    .search-form {
+        margin-bottom: 20px;
     }
 
     .product-card {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover {
+        transform: scale(1.03);
+    }
+
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 1.6em;
+        color: #007bff;
+        margin-bottom: 8px;
+    }
+
+    .list-group-item {
+        font-size: 1.2em;
+        color: #6c757d;
     }
 
     .card-footer {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding: 15px;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    .btn {
+        font-size: 1.2em;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: #ffffff;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: #ffffff;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
     }
 </style>
 
+<div class="landing-header">
+    <div class="container">
+        <h1 class="landing-title">Your Ultimate Shopping Destination</h1>
+        <p class="landing-subtitle">Discover a world of amazing products. Explore and shop with ease.</p>
+        <a href="/Products/Index" class="landing-button">Explore Products</a>
+    </div>
+</div>
+
 <div class="container">
-    <div class="product-title">
-        <h2>Our Amazing Products</h2>
-    </div>
-
-    @if (User.IsInRole("admin") || User.IsInRole("seller"))
-    {
-        <a class="btn btn-primary mb-3" href="/Products/Create">New Product</a>
-    }
-
-    <div class="row">
-        <div class="col-md-4 offset-md-8 mb-4">
-            <form method="get" action="/Products/Index">
-                <div class="input-group">
-                    <select class="form-control" name="categoryFilter">
-                        <option value="">All Categories</option>
-                        @foreach (var category in Model.ListofCategories)
-                        {
-                            <option value="@category.id">@category.name</option>
-                        }
-                    </select>
-                    <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </div>
-            </form>
+  <div class="search-form">
+    <form method="get" action="/Products/Index">
+        <div class="input-group">
+            <select class="form-control" name="categoryFilter">
+                <option value="">All Categories</option>
+                @foreach (var category in Model.ListofCategories)
+                {
+                    <option value="@category.id">@category.name</option>
+                }
+            </select>
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
         </div>
-    </div>
+    </form>
+</div>
+
 
     <div class="row">
         @foreach (var item in Model.ListofProducts)
@@ -82,16 +181,18 @@
                                     <span class="text-danger">Not Available</span>
                                 }
                             </li>
-                            <li class="list-group-item">Category: @Model.ListofCategories.FirstOrDefault(c => c.id == item.category)?.name</li>
+                            <li class="list-group-item">@Model.ListofCategories.FirstOrDefault(c => c.id == item.category)?.name</li>
                         </ul>
                     </div>
                     <div class="card-footer">
                         @if (User.IsInRole("admin"))
                         {
-                            <a href="/Products/Edit?id=@item.id" class="btn btn-primary btn-sm">Edit</a>
-                            <a href="/Products/Delete?id=@item.id" class="btn btn-danger btn-sm">Delete</a>
+                            <div class="btn-group">
+                                <a href="/Products/Edit?id=@item.id" class="btn btn-primary">Edit</a>
+                                <a href="/Products/Delete?id=@item.id" class="btn btn-danger">Delete</a>
+                            </div>
                         }
-                        <a href="/Products/Details?id=@item.id" class="btn btn-success btn-sm">View Details</a>
+                        <a href="/Products/Details?id=@item.id" class="btn btn-success">View Details</a>
                     </div>
                 </div>
             </div>

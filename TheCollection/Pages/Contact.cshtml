@@ -1,0 +1,76 @@
+﻿@page
+@model TheCollection.Pages.ContactModel
+@{
+}
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-lg-5 col-sm-6 mb-5">
+                <h2 class="font-weight-bold mb-4">Central Office (Kigali)</h2>
+                <p>We are located in the vibrant city of Kigali, Rwanda. Feel free to reach out to us using the contact information below:</p>
+                <ul class="list-unstyled contact-list">
+                    <li class="mb-3"><a href="tel:+250787070407"><i class="tf-ion-ios-telephone mr-2"></i>
+                            Call us at: +250787070407</a></li>
+                    <li class="mb-3"><a href=""><i class="tf-ion-email mr-2"></i>Email us at: thecollection@email.com</a>
+                    </li>
+                    <li class="mb-3"><i class="tf-ion-ios-location mr-2"></i>Kigali, Rwanda
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 mb-5">
+
+                <h2 class="font-weight-bold mb-4">Opening Hours</h2>
+                <ul class="list-unstyled">
+
+                    <li class="mb-2">Monday: 9:00 AM – 7:00 PM</li>
+
+                    <li class="mb-2">Tuesday: 9:00 AM – 7:00 PM</li>
+
+                    <li class="mb-2">Wednesday: 9:00 AM – 7:00 PM</li>
+
+                    <li class="mb-2">Thursday: 9:00 AM – 7:00 PM</li>
+
+                    <li class="mb-2">Friday: 9:00 AM – 7:00 PM</li>
+
+                    <li class="mb-2">Saturday: 9:00 AM – 5:00 PM</li>
+
+                    <li class="mb-2">Sunday: Closed</li>
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="font-weight-bold mb-4">Contact</h2>
+                <form action="#" method="POST" class="row">
+                    <div class="col-lg-6 mb-3">
+                        <input type="text" class="form-control mb-2" id="name" name="name" placeholder="Your Name"
+                            required>
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <input type="email" class="form-control mb-2" id="email" name="email" placeholder="Your Email"
+                            required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <textarea name="message" id="message" class="form-control mb-2" placeholder="Your Message"
+                            required></textarea>
+                    </div>
+                    <div class="col-12 text-right">
+                        <button type="submit" value="send" class="btn btn-main btn-main-sm">Send Now</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Location map here  -->
+<div class="container mt-5">
+    <h2 class="font-weight-bold mb-4">Location Map</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d254717.9297928946!2d30.052576656448027!3d-1.9439464172670886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19d88b847d3c7cc3%3A0x8be776c8ec6a8887!2sDowntown%20Kigali%2C%20Rwanda!5e0!3m2!1sen!2sus!4v1642203097912!5m2!1sen!2sus"
+        width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+        tabindex="0"></iframe>
+</div>

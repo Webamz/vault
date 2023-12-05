@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Security.Claims;
 
@@ -10,10 +12,10 @@ namespace TheVault.Pages.Products
     public class CreateModel : PageModel
     {
         public ProductInfo productInfo = new ProductInfo();
-        public CategoryInfo categoryInfo = new CategoryInfo();
         public List<CategoryInfo> ListofCategories = new List<CategoryInfo>();
         public string errorMessage = "";
         public string successMessage = "";
+
         public void OnGet()
         {
             string conString = "Data Source=.;Initial Catalog=vault_ecommerce;Integrated Security=True";
@@ -28,15 +30,14 @@ namespace TheVault.Pages.Products
                     {
                         while (reader.Read())
                         {
-                            CategoryInfo categoryInfo = new CategoryInfo();
-                            categoryInfo.id = reader["category_id"].ToString();
-                            categoryInfo.name = reader["category_name"].ToString();
+                            CategoryInfo category = new CategoryInfo();
+                            category.id = reader["category_id"].ToString();
+                            category.name = reader["category_name"].ToString();
 
-                            ListofCategories.Add(categoryInfo);
+                            ListofCategories.Add(category);
                         }
                     }
                 }
-
             }
         }
 
@@ -48,12 +49,12 @@ namespace TheVault.Pages.Products
                 if (userIdClaim != null)
                 {
                     productInfo.seller = userIdClaim.Value.ToString();
+                    Console.WriteLine("before retrieval id : "+ productInfo.seller);  
                 }
             }
             else
             {
                 productInfo.seller = Request.Form["seller"];
-
             }
             productInfo.name = Request.Form["name"];
             productInfo.desc = Request.Form["description"];
@@ -62,47 +63,45 @@ namespace TheVault.Pages.Products
             productInfo.image = Request.Form["image"];
             productInfo.category = Request.Form["category"];
 
-
-            if (productInfo.name.Length == 0 || productInfo.desc.Length == 0 || productInfo.price.Length == 0 ||
-                productInfo.price.Length == 0 || productInfo.instock.Length == 0 || productInfo.image.Length == 0)
+            if (string.IsNullOrEmpty(productInfo.name) || string.IsNullOrEmpty(productInfo.desc) ||
+                string.IsNullOrEmpty(productInfo.price) || string.IsNullOrEmpty(productInfo.instock) ||
+                string.IsNullOrEmpty(productInfo.image) || string.IsNullOrEmpty(productInfo.category))
             {
                 errorMessage = "All fields are required";
                 return;
             }
 
-            // Print or log the seller value to check if it has a valid value
-            Console.WriteLine($"Seller ID: {productInfo.seller}");
-            Console.WriteLine($"Role: {User.FindFirst(ClaimTypes.Role)}");
-
-
-
-            //saving the data
             try
             {
                 string conString = "Data Source=.;Initial Catalog=vault_ecommerce;Integrated Security=True";
                 using (SqlConnection con = new SqlConnection(conString))
                 {
                     con.Open();
-                    string sqlQuery2 = "SELECT * FROM category";
+                    Console.WriteLine("Runnig query for retrieval");
+                    //// Retrieve seller_id based on the logged-in user's id
+                    //string sqlQuery2 = "SELECT * FROM sellers WHERE seller_id = @id";
+                    //using (SqlCommand cmd = new SqlCommand(sqlQuery2, con))
+                    //{
+                    //    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(productInfo.seller));
+                    //    using (SqlDataReader reader = cmd.ExecuteReader())
+                    //    {
+                    //        if (reader.Read())
+                    //        {
+                    //            int sellerIdFromQuery = Convert.ToInt32(reader["id"]);
+                    //            productInfo.seller = sellerIdFromQuery.ToString();
+                    //            Console.WriteLine("Retrieved id " + productInfo.seller);
+                    //        }
+                    //        else
+                    //        {
+                    //            errorMessage = "Seller ID not found in sellers table.";
+                    //            return;
+                    //        }
+                    //    }
+                    //}
 
-                    using (SqlCommand cmd = new SqlCommand(sqlQuery2, con))
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                CategoryInfo categoryInfo = new CategoryInfo();
-                                categoryInfo.id = reader["category_id"].ToString();
-                                categoryInfo.id = reader["category_name"].ToString();
-
-                                ListofCategories.Add(categoryInfo);
-                            }
-                        }
-                    }
-
-
+                    // Insert data into the products table
                     string sqlQuery = "INSERT INTO products(product_name, product_description, product_price, product_instock, product_image, product_category, seller)" +
-                            "VALUES(@name, @desc, @price, @instock, @image, @category, @sellerId)";
+                                      "VALUES(@name, @desc, @price, @instock, @image, @category, @sellerId)";
                     using (SqlCommand cmd = new SqlCommand(sqlQuery, con))
                     {
                         cmd.Parameters.AddWithValue("@name", productInfo.name);
@@ -113,20 +112,36 @@ namespace TheVault.Pages.Products
                         cmd.Parameters.AddWithValue("@category", productInfo.category);
                         cmd.Parameters.AddWithValue("@sellerId", Convert.ToInt32(productInfo.seller));
 
-
-
                         cmd.ExecuteNonQuery();
                     }
-                }
 
+                    // Refresh the list of categories
+                    string sqlQuery3 = "SELECT * FROM category";
+                    ListofCategories.Clear(); // Clear existing categories
+                    using (SqlCommand cmd = new SqlCommand(sqlQuery3, con))
+                    {
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                CategoryInfo category = new CategoryInfo();
+                                category.id = reader["category_id"].ToString();
+                                category.name = reader["category_name"].ToString();
+
+                                ListofCategories.Add(category);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 errorMessage = ex.Message;
                 return;
             }
+
             productInfo.name = ""; productInfo.desc = ""; productInfo.price = "";
-            productInfo.image = "";  productInfo.instock = "";
+            productInfo.image = ""; productInfo.instock = "";
             successMessage = "New Product Added successfully";
 
             Response.Redirect("/Products/Index");

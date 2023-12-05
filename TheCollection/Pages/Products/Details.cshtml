@@ -45,11 +45,22 @@
                         <label class="fw-bold">Availability</label>
                         @if (int.TryParse(Model.productInfo.instock, out int instockValue))
                         {
-                            <p class="text-success">@((instockValue > 0) ? "Available" : "Not Available")</p>
+                            @if (instockValue > 0)
+                            {
+                                <form method="post">
+                                    <input type="hidden" name="productId" value="@Model.productInfo.id" />
+                                    <p class="text-success">Product is available for purchase.</p>
+                                    <button type="submit" class="btn btn-primary add-to-cart">Add to Cart</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <p class="text-danger">Product is not available for purchase.</p>
+                            }
                         }
                         else
                         {
-                            <p class="text-danger">Not Available</p>
+                            <p class="text-danger">Product availability information is not valid.</p>
                         }
                     </div>
                 }
@@ -60,10 +71,5 @@
         <div>
             <span class="badge bg-primary">@Model.ListofCategories.FirstOrDefault(c => c.id == Model.productInfo.category)?.name</span>
         </div>
-<form method="post">
-    <input type="hidden" name="productId" value="@Model.productInfo.id" />
-    <button type="submit" class="btn btn-primary add-to-cart">Add to Cart</button>
-</form>
     </div>
 </div>
-

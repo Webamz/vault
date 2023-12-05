@@ -38,4 +38,17 @@
             </div>
         </div>
     </form>
+<p><a asp-page="/Accounts/ForgotPassword">Forgot your password?</a></p>
+
 </div>
+
+
+<script>
+    @if (ViewData["ErrorMessage"] != null)
+    {
+        <text>
+            // Display an alert with the error message
+            alert('@ViewData["ErrorMessage"]');
+        </text>
+    }
+</script>

@@ -40,16 +40,20 @@
             <input type="text" class="form-control" name="address" value="@Model.userInfo.address" />
         </div>
     </div>
-<div class="row mb-3">
-    <label class="col-sm-3 col-form-label">Role</label>
-    <div class="col-sm-6">
-        <select class="form-select" name="role">
-            <option value="1" selected="@(Model.userInfo.role == "1")">Admin</option>
-            <option value="2" selected="@(Model.userInfo.role == "2")">Seller</option>
-            <option value="3" selected="@(Model.userInfo.role == "3")">Normal</option>
-        </select>
-    </div>
-</div>
+
+    @if(User.IsInRole("admin"))
+    {
+        <div class="row mb-3">
+            <label class="col-sm-3 col-form-label">Role</label>
+            <div class="col-sm-6">
+                <select class="form-select" name="role">
+                    <option value="1" selected="@(Model.userInfo.role == "1")">Admin</option>
+                    <option value="2" selected="@(Model.userInfo.role == "2")">Seller</option>
+                    <option value="3" selected="@(Model.userInfo.role == "3")">Normal</option>
+                </select>
+            </div>
+        </div>
+    }
 
     @if(Model.successMessage.Length > 0)
     {

@@ -113,7 +113,6 @@ namespace TheCollection.Pages.Products
                                             instock = reader["product_instock"].ToString(),
                                             image = reader["product_image"].ToString(),
                                             category = reader["product_category"].ToString()
-                                            // ... (copy other relevant properties)
                                         };
 
                                         // Assuming CartItems is a static property

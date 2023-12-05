@@ -10,14 +10,34 @@ namespace TheCollection.Pages
 {
     public class OrderModel : PageModel
     {
+        private readonly PaymentService _paymentService;
 
+        public OrderModel(PaymentService paymentService)
+        {
+            _paymentService = paymentService;
+        }
         public List<ProductInfo> CartItems { get; set; }
         public decimal TotalPrice { get; set; }
 
         [TempData]
         public string ErrorMessage { get; set; }
-        public IActionResult OnPost(string cartItems, decimal totalPrice)
+        public IActionResult OnPost(string cartItems, decimal totalPrice, string creditCardNumber)
         {
+            if (string.IsNullOrEmpty(creditCardNumber))
+            {
+                ErrorMessage = "Invalid credit card number.";
+                return Page();
+            }
+
+
+            if (!_paymentService.ProcessPayment(creditCardNumber, totalPrice))
+            {
+                ErrorMessage = "Payment failed. Please check your credit card details and try again.";
+                return Page();
+            }
+
+
+
             // Deserialize cartItems
             var decodedCartItems = JsonConvert.DeserializeObject<List<ProductInfo>>(cartItems);
 
