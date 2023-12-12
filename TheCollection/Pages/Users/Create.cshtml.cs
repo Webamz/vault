@@ -29,13 +29,13 @@ namespace TheCollection.Pages.Users
             string confirmPassword = Request.Form["confirmPassword"];
 
             // Validate password and confirmation
-            if (userInfo.password != confirmPassword)
+            if (userInfo.password.Length >=8)
             {
-                errorMessage = "Password and Confirm Password do not match.";
+                errorMessage = "Password must be 8 characters";
                 return;
             }
+            
 
-            // Validate other fields as needed
 
             // Hash the password
             string hashedPassword = HashPassword(userInfo.password);

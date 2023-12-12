@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authorization;
-using TheCollection.Authorization;
 using TheCollection.Pages;
 
 var builder = WebApplication.CreateBuilder(args);

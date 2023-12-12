@@ -65,3 +65,4 @@ C:\Users\iradu\Desktop\dotNet\aa_project\vault\TheCollection\obj\Debug\net6.0\Th
 C:\Users\iradu\Desktop\dotNet\aa_project\vault\TheCollection\obj\Debug\net6.0\TheCollection.genruntimeconfig.cache
 C:\Users\iradu\Desktop\dotNet\aa_project\vault\TheCollection\obj\Debug\net6.0\ref\TheCollection.dll
 C:\Users\iradu\Desktop\dotNet\aa_project\vault\TheCollection\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\iradu\Desktop\dotNet\aa_project\vault\TheCollection\bin\Debug\net6.0\DinkToPdf.dll

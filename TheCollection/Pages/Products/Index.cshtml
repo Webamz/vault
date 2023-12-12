@@ -134,7 +134,18 @@
     <div class="container">
         <h1 class="landing-title">Your Ultimate Shopping Destination</h1>
         <p class="landing-subtitle">Discover a world of amazing products. Explore and shop with ease.</p>
-        <a href="/Products/Index" class="landing-button">Explore Products</a>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="landing-join-section">
+                <p class="landing-join-message">Join our community today for exclusive deals and a personalized shopping experience!</p>
+                <a href="/Users/Create" class="landing-button">Join Now</a>
+            </div>
+        }
+        else
+        {
+            <a href="/Products/Index" class="landing-button">Explore Products</a>
+        }
     </div>
 </div>
 

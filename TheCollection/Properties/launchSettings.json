@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "TheVault": {
+    "TheCollection": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

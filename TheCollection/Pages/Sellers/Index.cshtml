@@ -5,15 +5,12 @@
 
 <br />
 <h2>List of Sellers</h2>
-
+@* 
 @if (User.IsInRole("seller"))
 {
-    <p>You can only view information about other sellers.</p>
-}
-else
-{
-    <a class="btn btn-primary btn-sm" href="/Sellers/Create">New Seller</a>
-}
+   <p>You can only view information about other sellers.</p>
+}*@
+
 
 <table class="table">
     <thead>
@@ -23,7 +20,7 @@ else
             <th>Email</th>
             <th>Phone</th>
             <th>Address</th>
-            @if (!User.IsInRole("seller"))
+            @if (User.IsInRole("admin"))
             {
                  <th>SellerId</th>
                 <th>Actions</th>
@@ -39,7 +36,7 @@ else
                 <td>@item.email</td>
                 <td>@item.phone</td>
                 <td>@item.address</td>
-                @if (!User.IsInRole("seller"))
+                @if (User.IsInRole("admin"))
                 {
                     <td>@item.id</td>
                     <td>
