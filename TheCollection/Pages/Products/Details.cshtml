@@ -39,7 +39,7 @@
                         <p>@Model.productInfo.instock</p>
                     </div>
                 }
-                else
+                else if (!User.IsInRole("admin"))
                 {
                     <div class="mb-2">
                         <label class="fw-bold">Availability</label>

@@ -78,26 +78,7 @@ namespace TheVault.Pages.Products
                 {
                     con.Open();
                     Console.WriteLine("Runnig query for retrieval");
-                    //// Retrieve seller_id based on the logged-in user's id
-                    //string sqlQuery2 = "SELECT * FROM sellers WHERE seller_id = @id";
-                    //using (SqlCommand cmd = new SqlCommand(sqlQuery2, con))
-                    //{
-                    //    cmd.Parameters.AddWithValue("@id", Convert.ToInt32(productInfo.seller));
-                    //    using (SqlDataReader reader = cmd.ExecuteReader())
-                    //    {
-                    //        if (reader.Read())
-                    //        {
-                    //            int sellerIdFromQuery = Convert.ToInt32(reader["id"]);
-                    //            productInfo.seller = sellerIdFromQuery.ToString();
-                    //            Console.WriteLine("Retrieved id " + productInfo.seller);
-                    //        }
-                    //        else
-                    //        {
-                    //            errorMessage = "Seller ID not found in sellers table.";
-                    //            return;
-                    //        }
-                    //    }
-                    //}
+                    // Retrieve seller_id based on the logged-in user's id
 
                     // Insert data into the products table
                     string sqlQuery = "INSERT INTO products(product_name, product_description, product_price, product_instock, product_image, product_category, seller)" +
